@@ -25,4 +25,4 @@ jobs:
           $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$EngineVersion" "InstalledDirectory")
           $output = "engine_path=$($EngineInstalationFolder)"
           echo $output
-          $output > $GITHUB_OUTPUT
+          $output >> $GITHUB_OUTPUT
