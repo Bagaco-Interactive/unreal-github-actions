@@ -28,8 +28,8 @@ jobs:
          $engine_association = $jsonObject.EngineAssociation
          $output = "engine_association=$($engine_association)"
          echo $output
-         $output >> $GITHUB_OUTPUT
-         echo $GITHUB_OUTPUT
+         $output >> $Env:GITHUB_OUTPUT
+         echo $Env:GITHUB_OUTPUT
 
 
 
