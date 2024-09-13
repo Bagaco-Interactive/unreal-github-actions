@@ -10,7 +10,6 @@ on:
         required: true
         type: string
 jobs:
-  
   Build:
 # make sure we have permision to write
     permissions: write-all
