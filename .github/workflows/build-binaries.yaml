@@ -26,7 +26,7 @@ jobs:
           ls ${{ github.workspace }}
       - name: Build the binaries
         # run: D:/UE_5.4/Engine/Binaries/DotNET/UnrealBuildTool/UnrealBuildTool.exe -projectfiles -project="%~dp0\BuildingBinaries1.uproject" -game -engine -progress
-        run:  ${{ inputs.engine-path }}/Engine/Build/BatchFiles/RunUAT.bat BuildCookRun -platform=Win64 -clientconfig=Development -project="${{ github.workspace }}${{ inputs.project-name }}.uproject" -build %*
+        run:  ${{ inputs.engine-path }}/Engine/Build/BatchFiles/RunUAT.bat BuildCookRun -platform=Win64 -clientconfig=Development -project="${{ github.workspace }}\${{ inputs.project-name }}.uproject" -build %*
       - name: Commit Binaries
         run: |
           git config user.name "github-actions[bot]"
