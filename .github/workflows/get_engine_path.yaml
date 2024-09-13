@@ -16,7 +16,7 @@ jobs:
       engine_path: ${{steps.get.engine_path}}
     runs-on: self-hosted
     steps:
-      - name: Commit Binaries
+      - name: Get Engine Pathy
         id: get
         run: |
           SET EngineInstalationFolder=""
