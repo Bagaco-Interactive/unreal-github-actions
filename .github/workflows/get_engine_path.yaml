@@ -14,7 +14,7 @@ on:
 jobs:
   get_engine_path:
     outputs:
-      engine_path: ${{steps.get.engine_path}}
+      engine_path: ${{steps.get.outputs.engine_path}}
     runs-on: self-hosted
     steps:
       - name: Get Engine Path
@@ -22,7 +22,6 @@ jobs:
         shell: powershell
         run: |
           $EngineVersion = ${{ inputs.engine_version }}
-          # this whole workflow basically an wrapper around this powershell, so if you just want the functionality, call this line
           $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$EngineVersion" "InstalledDirectory")
           $output = "engine_path=$($EngineInstalationFolder)"
           echo $output
