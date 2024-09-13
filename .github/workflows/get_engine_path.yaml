@@ -1,0 +1,27 @@
+name: Build and Publish Binaries
+run-name: Building commit  ${{ github.sha }}
+on:
+  workflow_call:
+    inputs:
+      engine_version:
+        required: true
+        type: string
+    outputs:
+       path:
+        description: the string identifying the engine version or custom engine guid
+        value: ${{jobs.get_engine_path.outputs.engine_path}}
+jobs:
+  get_engine_path:
+    outputs:
+      engine_path: ${{steps.get.engine_path}}
+    runs-on: self-hosted
+    steps:
+      - name: Commit Binaries
+        id: get
+        run: |
+          SET EngineInstalationFolder=""
+          SET EngineVersion = ${{ inputs.engine_version }}
+          REM todo: deal with custom builds
+          FOR /F "tokens=2* skip=2" %%a in ('REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%EngineVersion%" /v "InstalledDirectory"') do SET EngineInstalationFolder=%%b
+          echo "engine_path=%EngineInstalationFolder%"
+
