@@ -18,10 +18,10 @@ jobs:
     steps:
       - name: Commit Binaries
         id: get
+        shell: bash
         run: |
           SET EngineInstalationFolder=""
           SET EngineVersion = ${{ inputs.engine_version }}
           REM todo: deal with custom builds
           FOR /F "tokens=2* skip=2" %%a in ('REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\EpicGames\Unreal Engine\%EngineVersion%" /v "InstalledDirectory"') do SET EngineInstalationFolder=%%b
           echo "engine_path=%EngineInstalationFolder%"
-
