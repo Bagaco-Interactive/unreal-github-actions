@@ -23,7 +23,7 @@ jobs:
         run: |
           $EngineVersion = ${{ inputs.engine_version }}
           # this whole workflow basically an wrapper around this powershell, so if you just want the functionality, call this line
-          $EngineInstalationFolder=Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$EngineVersion" "InstalledDirectory"
+          $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$EngineVersion" "InstalledDirectory")
           $output = "engine_path=$($EngineInstalationFolder)"
           echo $output
           $output > $GITHUB_OUTPUT
