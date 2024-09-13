@@ -22,7 +22,7 @@ jobs:
           lfs: true
       - name: Get project's engine association
         id: get
-        shell: pwsh
+        shell: powershell
         run:  |
          $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project-name }}.uproject" | ConvertFrom-JSON
          $engine_association = $jsonObject.EngineAssociation
