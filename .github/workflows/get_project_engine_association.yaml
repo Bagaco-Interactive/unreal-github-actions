@@ -3,7 +3,7 @@ run-name: Get Project's Engine Association
 on:
   workflow_call:
     inputs:
-      project_name:
+      project-name:
         required: true
         type: string
     outputs:
@@ -24,7 +24,7 @@ jobs:
         id: get
         shell: powershell
         run:  |
-         $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project_name }}.uproject" | ConvertFrom-JSON
+         $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project-name }}.uproject" | ConvertFrom-JSON
          $engine_association = $jsonObject.EngineAssociation
          $output = "engine_association=$($engine_association)"
          echo $output
