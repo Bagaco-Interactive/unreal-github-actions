@@ -7,7 +7,7 @@ on:
         required: true
         type: string
     outputs:
-      engine_association:
+      engine-association:
         description: the string identifying the engine version or custom engine guid
         value: ${{jobs.get_engine_version.outputs.engine_association}}
 jobs:
@@ -26,7 +26,7 @@ jobs:
         run:  |
          $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project-name }}.uproject" | ConvertFrom-JSON
          $engine_association = $jsonObject.EngineAssociation
-         $output = "engine_association=$($engine_association)"
+         $output = "engine_association=$($engine-association)"
          echo $output
          $output >> $Env:GITHUB_OUTPUT
          echo $Env:GITHUB_OUTPUT
