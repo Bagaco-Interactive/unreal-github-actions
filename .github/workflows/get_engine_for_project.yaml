@@ -1,0 +1,36 @@
+name: Get Engine path for Project
+run-name: Get Engine path for Project
+on:
+  workflow_call:
+    inputs:
+      project_name:
+        required: true
+        type: string
+    outputs:
+      engine_path:
+        description: the string identifying the engine version or custom engine guid
+        value: ${{jobs.get_engine_version.outputs.engine_path}}
+jobs:
+  get_engine_version:
+    runs-on: self-hosted
+    outputs:
+      engine_path: ${{steps.get.outputs.engine_path}}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Get Engine path for Project
+        id: get
+        shell: powershell
+        run:  |
+         $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project_name }}.uproject" | ConvertFrom-JSON
+         $engine_association = $jsonObject.EngineAssociation
+         $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$engine_association" "InstalledDirectory")
+         $output = "engine_path=$($EngineInstalationFolder)"
+         echo $output
+         $output >> $Env:GITHUB_OUTPUT
+
+
+
+         

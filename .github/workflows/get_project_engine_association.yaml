@@ -3,11 +3,11 @@ run-name: Get Project's Engine Association
 on:
   workflow_call:
     inputs:
-      project-name:
+      project_name:
         required: true
         type: string
     outputs:
-      engine-association:
+      engine_association:
         description: the string identifying the engine version or custom engine guid
         value: ${{jobs.get_engine_version.outputs.engine_association}}
 jobs:

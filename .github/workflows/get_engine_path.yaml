@@ -4,7 +4,7 @@ on:
   workflow_call:
     
     inputs:
-      engine-version:
+      engine_version:
         required: true
         type: string
     outputs:
@@ -21,7 +21,7 @@ jobs:
         id: get
         shell: powershell
         run: |
-          $EngineVersion = ${{ inputs.engine-version }}
+          $EngineVersion = ${{ inputs.engine_version }}
           $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$EngineVersion" "InstalledDirectory")
           $output = "engine_path=$($EngineInstalationFolder)"
           echo $output
