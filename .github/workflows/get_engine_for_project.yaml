@@ -26,7 +26,7 @@ jobs:
         run:  |
          $jsonObject = Get-Content -Path "${{ github.workspace }}\${{ inputs.project_name }}.uproject" | ConvertFrom-JSON
          $engine_association = $jsonObject.EngineAssociation
-         echo "if this fails, register a new key on regedit under \"HKEY_CURRENT_USER\SOFTWARE\Epic Games\UnrealEngine\\" with the version on the project \"$engine_association\" and a string value with the name \"InstalledDirectory\""
+         echo "if this fails, register a new key on regedit under HKEY_CURRENT_USER\SOFTWARE\Epic Games\UnrealEngine\ with the version on the project $engine_association and a string value with the name InstalledDirectory"
          $EngineInstalationFolder=(Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$engine_association" "InstalledDirectory")
          $output = "engine_path=$($EngineInstalationFolder)"
          echo $output
