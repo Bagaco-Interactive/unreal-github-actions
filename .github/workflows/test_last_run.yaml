@@ -21,6 +21,5 @@ jobs:
     needs: exampleJob
     steps:
       - name: test
-        shell: powershell
         run:  |
           echo "${{ needs.exampleJob.outputs.last_status }}"
