@@ -1,0 +1,26 @@
+# Copied from https://www.softwaretester.blog/detecting-github-workflow-job-run-status-changes
+name: 'Github Workflow History'
+
+'on':
+  workflow_dispatch:
+    inputs:
+      failJob:
+        description: Fail the job?
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+  exampleJob:
+    permissions: write-all
+    uses: bagaco-interactive/unreal-github-actions/.github/workflows/last_run_status.yaml@main
+    with:
+      workflow_file: test_last_run
+  send_message:
+    runs-on: ubuntu-latest
+    needs: exampleJob
+    steps:
+      - name: test
+        shell: powershell
+        run:  |
+          echo "${{ needs.exampleJob.outputs.last_status }}"

@@ -22,6 +22,8 @@ jobs:
         run:  |
          LAST_JOB_STATUS=$(gh run list --workflow ${{ inputs.workflow_file }}.yaml | grep -oh "completed.*" | head -1 | awk '{print $2}')
          echo "::set-output name=changedState::LAST_JOB_STATUS"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
 
 
