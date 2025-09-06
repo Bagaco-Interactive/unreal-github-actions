@@ -1,0 +1,28 @@
+# Copied from https://www.softwaretester.blog/detecting-github-workflow-job-run-status-changes
+name: Get Last Run Status
+run-name: Get Last Run Status
+on:
+  workflow_call:
+    inputs:
+      workflow_file:
+        required: true
+        type: string
+    outputs:
+      last_status:
+        description: the status of the last workflow ran
+        value: ${{jobs.get_engine_version.outputs.last_status}}
+jobs:
+  get_status:
+    runs-on: ubuntu-latest
+    outputs:
+      last_status: ${{steps.get.outputs.last_status}}
+    steps:
+      - name: Get Status
+        id: get
+        run:  |
+         LAST_JOB_STATUS=$(gh run list --workflow ${{ inputs.workflow_file }}.yaml | grep -oh "completed.*" | head -1 | awk '{print $2}')
+         echo "::set-output name=changedState::LAST_JOB_STATUS"
+
+
+
+         
