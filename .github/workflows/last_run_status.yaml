@@ -13,7 +13,8 @@ on:
         value: ${{jobs.get_engine_version.outputs.last_status}}
 jobs:
   get_status:
-    runs-on: ubuntu-latest
+# running on self hosted because I don't want to have to checkout the project on linux just to be able to get the last info.
+    runs-on: self-hosted
     outputs:
       last_status: ${{steps.get.outputs.last_status}}
     steps:
@@ -21,7 +22,7 @@ jobs:
         id: get
         run:  |
          LAST_JOB_STATUS=$(gh run list --workflow ${{ inputs.workflow_file }}.yaml | grep -oh "completed.*" | head -1 | awk '{print $2}')
-         echo "::set-output name=changedState::LAST_JOB_STATUS"
+         echo "{changedState}={LAST_JOB_STATUS}" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
