@@ -32,4 +32,5 @@ jobs:
           git add Binaries/*dll --force
           git add */Binaries/*dll --force
           git commit -m "Binaries for ${{github.sha}}"
+          git pull --rebase=true
           git push

@@ -1,4 +1,5 @@
 # Copied from https://www.softwaretester.blog/detecting-github-workflow-job-run-status-changes
+# But actually doesn't work.... 
 name: Get Last Run Status
 run-name: Get Last Run Status
 on:
