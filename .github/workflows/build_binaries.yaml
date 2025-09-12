@@ -31,8 +31,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Binaries/*dll --force
           git add */Binaries/*dll --force
-          text=$(git log -1 --pretty=%B)
-          git commit -m "Binaries for ${{github.sha}} \n {text}"
+          git commit -m "Binaries for ${{github.sha}}"
           git restore . --progress
           git pull --rebase=true
           git push
